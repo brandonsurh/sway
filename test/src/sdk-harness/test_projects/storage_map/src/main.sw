@@ -67,7 +67,7 @@ storage {
     map17: StorageMap<Enum, u64> = StorageMap::<Enum, u64> {},
     map18: StorageMap<str[33], u64> = StorageMap::<str[33], u64> {},
     map19: StorageMap<[b256; 3], u64> = StorageMap::<[b256; 3], u64> {},
-    map20: StorageMap<u8, u8> = StorageMap::<u8, u8> {},
+    map20: StorageMap<u64, bool> = StorageMap::<u64, bool> {},
 }
 
 abi StorageMapTest {
@@ -205,7 +205,7 @@ abi StorageMapTest {
     fn remove_from_array_to_u64_map(key: [b256; 3]) -> bool;
 
     #[storage(read, write)]
-    fn try_insert_to_existing_u8_map(key: u8, value: u8) -> bool;
+    fn try_insert_u64_to_existing_bool_map(key: u64, value: bool) -> bool;
 }
 
 #[storage(read, write)]
@@ -510,7 +510,7 @@ impl StorageMapTest for Contract {
     }
 
     #[storage(read, write)]
-    fn try_insert_to_existing_u8_map(key: u8, value: u8) -> bool {
+    fn try_insert_u64_to_existing_bool_map(key: u64, value: bool) -> bool {
         storage.map20.try_insert(key, value)
     }
 }
